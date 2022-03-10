@@ -34,8 +34,8 @@ syndat=/scratch1/NCEPDEV/hwrf/noscrub/input/SYNDAT-PLUS
 COMgfs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMGFSv16
 COMINgfs={COMgfs}
 #COMrtofs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMRTOFSv2
-COMrtofs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMMOM6analysis
-COMINrtofs={COMrtofs}
+COMocean=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMMOM6analysis
+COMINocean={COMocean}
 ## A-Deck directory for graphics
 ADECKhafs=/scratch1/NCEPDEV/hwrf/noscrub/input/abdeck/aid
 ## B-Deck directory for graphics

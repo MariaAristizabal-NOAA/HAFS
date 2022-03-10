@@ -54,7 +54,7 @@
 
   <!ENTITY GFSVER   "@[GFSVER:-PROD2019]">
   <!ENTITY COMgfs   "@[COMgfs:-&WORKhafs;/hafsdata]">
-  <!ENTITY COMrtofs "@[COMrtofs:-&WORKhafs;/hafsdata]">
+  <!ENTITY COMocean "@[COMocean:-&WORKhafs;/hafsdata]">
 
   <!-- The output conf file for each cycle: -->
   <!ENTITY CONFhafs "&COMhafs;/&STORMLABEL;.conf">
@@ -338,21 +338,21 @@
         <!-- Or use COMgfs/Ocean file dependency. Don't start until GFS/Ocean analysis is available.-->
         <and>
           <or>
-            <datadep age="02:00" minsize="25000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.n00.restart.a</cyclestr></datadep>
-            <datadep age="02:00" minsize="10000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.n00.restart.a.tgz</cyclestr></datadep>
+            <datadep age="02:00" minsize="25000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.n00.restart.a</cyclestr></datadep>
+            <datadep age="02:00" minsize="10000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/rtofs_glo.t00z.n00.restart.a.tgz</cyclestr></datadep>
           </or>
           <or>
             <strneq><left><cyclestr>@H</cyclestr></left><right>00</right></strneq>
             <or>
-              <datadep age="02:00" minsize="12000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.n00.archv.a</cyclestr></datadep>
-              <datadep age="02:00" minsize="5000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.n00.archv.a.tgz</cyclestr></datadep>
+              <datadep age="02:00" minsize="12000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.n00.archv.a</cyclestr></datadep>
+              <datadep age="02:00" minsize="5000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.n00.archv.a.tgz</cyclestr></datadep>
             </or>
           </or>
           <or>
             <streq><left><cyclestr>@H</cyclestr></left><right>00</right></streq>
             <or>
-              <datadep age="02:00" minsize="12000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.f@H.archv.a</cyclestr></datadep>
-              <datadep age="02:00" minsize="5000000000"><cyclestr>&COMrtofs;/rtofs.@Y@m@d/rtofs_glo.t00z.f@H.archv.a.tgz</cyclestr></datadep>
+              <datadep age="02:00" minsize="12000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.f@H.archv.a</cyclestr></datadep>
+              <datadep age="02:00" minsize="5000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.f@H.archv.a.tgz</cyclestr></datadep>
             </or>
           </or>
 @** if GFSVER==PROD2019

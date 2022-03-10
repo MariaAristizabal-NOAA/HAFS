@@ -180,7 +180,7 @@ class HYCOMInit1(hafs.hafstask.HAFSTask):
         # Decide the staging directory:
         outdir=self.confstr('RTOFS_STAGE','')
         if not outdir:
-            outdir=os.path.join(self.workdir,rtofs_atime.strftime('rtofs.%Y%m%d'))
+            outdir=os.path.join(self.workdir,rtofs_atime.strftime('mom6.%Y%m%d'))
 
         # Get data:
         ni=hafs.namelist.NamelistInserter(self.conf,self.section)
@@ -467,17 +467,17 @@ export gridno={gridno}\n'''.format(**self.__dict__))
         filestringtime=now.strftime('%Y%m%d_%H%M%S')
 
         if cyc.hour == 0:
-           rtofsatgz=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n{aHH}.archv.a.tgz')
-           rtofsa=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n{aHH}.archv.a')
-           rtofsb=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n{aHH}.archv.b')
-           archva=self.timestr('./rtofs_glo.t00z.n{aHH}.archv.a')
-           archvb=self.timestr('./rtofs_glo.t00z.n{aHH}.archv.b')
+           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.a.tgz')
+           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.a')
+           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.b')
+           archva=self.timestr('./mom6_hat10.t00z.n{aHH}.restart.a')
+           archvb=self.timestr('./mom6_hat10.t00z.n{aHH}.restart.b')
         else:
-           rtofsatgz=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.f{aHH}.archv.a.tgz')
-           rtofsa=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.f{aHH}.archv.a')
-           rtofsb=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.f{aHH}.archv.b')
-           archva=self.timestr('./rtofs_glo.t00z.f{aHH}.archv.a')
-           archvb=self.timestr('./rtofs_glo.t00z.f{aHH}.archv.b')
+           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.a.tgz')
+           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.a')
+           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.b')
+           archva=self.timestr('./mom6_hat10.t00z.f{aHH}.restart.a')
+           archvb=self.timestr('./mom6_hat10.t00z.f{aHH}.restart.b')
 
         if os.path.exists(rtofsb):
            produtil.fileop.make_symlink(rtofsb,archvb,force=True,logger=logger)
@@ -523,11 +523,11 @@ subregion %s
 
         epsilon=30
 
-        rtofs_restart_atgz=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n00.restart.a.tgz')
-        rtofs_restart_a=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n00.restart.a')
-        rtofs_restart_b=self.timestr('{COMrtofs}/rtofs.{aYMD}/rtofs_glo.t00z.n00.restart.b')
-        restart_in_a=self.timestr('./rtofs_glo.t00z.n00.restart.a')
-        restart_in_b=self.timestr('./rtofs_glo.t00z.n00.restart.b')
+        rtofs_restart_atgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n00.restart.a.tgz')
+        rtofs_restart_a=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n00.restart.a')
+        rtofs_restart_b=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n00.restart.b')
+        restart_in_a=self.timestr('./mom6_hat10.t00z.n00.restart.a')
+        restart_in_b=self.timestr('./mom6_hat10.t00z.n00.restart.b')
 
         if os.path.exists(rtofs_restart_b):
            produtil.fileop.make_symlink(rtofs_restart_b,restart_in_b,force=True,logger=logger)
@@ -847,7 +847,8 @@ class HYCOMInit2(hafs.hafstask.HAFSTask):
                 basin,repr(atmos_lon))
             jlogger.warning(msg)
             raise hafs.exceptions.NoOceanBasin(msg)
-        self.RUNmodIDin='rtofs_glo'
+        #self.RUNmodIDin='rtofs_glo'
+        self.RUNmodIDin='mom6_hat10'
         RUNmodIDin=self.RUNmodIDin
 
         aptable=self.confstrinterp('{PARMhycom}/hafs_hycom.application_table')
