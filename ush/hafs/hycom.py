@@ -847,8 +847,8 @@ class HYCOMInit2(hafs.hafstask.HAFSTask):
                 basin,repr(atmos_lon))
             jlogger.warning(msg)
             raise hafs.exceptions.NoOceanBasin(msg)
-        #self.RUNmodIDin='rtofs_glo'
-        self.RUNmodIDin='mom6_hat10'
+        self.RUNmodIDin='rtofs_glo'
+        #self.RUNmodIDin='mom6_hat10'
         RUNmodIDin=self.RUNmodIDin
 
         aptable=self.confstrinterp('{PARMhycom}/hafs_hycom.application_table')
@@ -1070,6 +1070,7 @@ export gridno={gridno}\n'''.format(**self.__dict__))
             cfpf.write(''.join(commands))
 
         tt=int(os.environ['TOTAL_TASKS'])
+        #tt=40
         logger.info ('CALLING gfs2ofsinputs %d ',tt)
         mpiserial_path=os.environ.get('MPISERIAL','*MISSING*')
         if mpiserial_path=='*MISSING*':
@@ -1110,6 +1111,7 @@ wslocal = 0       ! if  wslocal = 1, then wind stress are computed from wind vel
             cfpf.write(''.join(commands))
 
         tt=int(os.environ['TOTAL_TASKS'])
+        #tt=40
         logger.info ('CALLING gfs2ofs2 %d ',tt)
         mpiserial_path=os.environ.get('MPISERIAL','*MISSING*')
         if mpiserial_path=='*MISSING*':

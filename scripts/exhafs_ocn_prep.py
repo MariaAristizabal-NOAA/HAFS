@@ -37,7 +37,35 @@ ds=Datastore(filename,logger=logger)
 
 hycominit1workdir=DATA+"/hycominit1"
 hycominit1=hafs.hycom.HYCOMInit1(dstore=ds,conf=conf,section='hycominit1',taskname='hycominit1',workdir=hycominit1workdir,fcstlen=fcstlen)
-hycominit1.run()
+#hycominit1.run()
+
+COMocean = conf.getloc('COMocean')
+hour = conf.getloc('hour')
+hour_int = int(hour)
+YMD = conf.getloc('YMD')
+dir_mom6 = COMocean + '/' + 'mom6.' + YMD + '/' 
+dir_hycominit1 = DATA + '/hycominit1/'
+
+if hour_int == 0:
+    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+    os.system(cmd)
+    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
+    os.system(cmd)
+    os.chdir(dir_hycominit1)
+    cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+    os.system(cmd)
+    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.restart.a' 
+    os.system(cmd)
+else:
+    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz' 
+    os.system(cmd)
+    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.f' + hour + '.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.restart.b' 
+    os.system(cmd)
+    os.chdir(dir_hycominit1)
+    cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz' 
+    os.system(cmd)
+    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.restart.a' 
+    os.system(cmd)
 
 logger.info("hycominit1 done")
 
