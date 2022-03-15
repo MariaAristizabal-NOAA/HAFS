@@ -54,7 +54,7 @@ if hour_int == 0:
     os.chdir(dir_hycominit1)
     cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
     os.system(cmd)
-    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.restart.a' 
+    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.n00.restart.a' 
     os.system(cmd)
 else:
     cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz' 
