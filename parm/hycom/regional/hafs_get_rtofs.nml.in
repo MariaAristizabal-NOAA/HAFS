@@ -7,11 +7,11 @@
   ! Input data locations.  The [Lfn] is lead time, preceeded by an f
   ! or n.  The [type] is restart or arch[vs] and [ext] will be a, b or a.tgz
 
-  infmt(1)='<u:INDIR1>/rtofs_glo.t[AH]z.[Lfn].[type].[ext]'
+  infmt(1)='<u:INDIR1>/mom6_hat10.t[AH]z.[Lfn].[type].[ext]'
 
   ! Output data locations.
 
-  outfmt='<u:RTOFS_STAGE>/rtofs_[FY][Fm][Fd]_[FH][FM][FS]_[type].[ext]'
+  outfmt='<u:RTOFS_STAGE>/mom6_hat10_[FY][Fm][Fd]_[FH][FM][FS]_[type].[ext]'
 
   ! Analysis time:
   atime=<s:YMD>

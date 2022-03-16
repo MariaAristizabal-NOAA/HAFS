@@ -467,17 +467,17 @@ export gridno={gridno}\n'''.format(**self.__dict__))
         filestringtime=now.strftime('%Y%m%d_%H%M%S')
 
         if cyc.hour == 0:
-           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.a.tgz')
-           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.a')
-           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.restart.b')
-           archva=self.timestr('./mom6_hat10.t00z.n{aHH}.restart.a')
-           archvb=self.timestr('./mom6_hat10.t00z.n{aHH}.restart.b')
+           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.archv.a.tgz')
+           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.archv.a')
+           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.n{aHH}.archv.b')
+           archva=self.timestr('./mom6_hat10.t00z.n{aHH}.archv.a')
+           archvb=self.timestr('./mom6_hat10.t00z.n{aHH}.archv.b')
         else:
-           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.a.tgz')
-           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.a')
-           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.restart.b')
-           archva=self.timestr('./mom6_hat10.t00z.f{aHH}.restart.a')
-           archvb=self.timestr('./mom6_hat10.t00z.f{aHH}.restart.b')
+           rtofsatgz=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.archv.a.tgz')
+           rtofsa=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.archv.a')
+           rtofsb=self.timestr('{COMocean}/mom6.{aYMD}/mom6_hat10.t00z.f{aHH}.archv.b')
+           archva=self.timestr('./mom6_hat10.t00z.f{aHH}.archv.a')
+           archvb=self.timestr('./mom6_hat10.t00z.f{aHH}.archv.b')
 
         if os.path.exists(rtofsb):
            produtil.fileop.make_symlink(rtofsb,archvb,force=True,logger=logger)
