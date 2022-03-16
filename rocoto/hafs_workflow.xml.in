@@ -339,7 +339,7 @@
         <and>
           <or>
             <datadep age="02:00" minsize="25000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.n00.restart.a</cyclestr></datadep>
-            <datadep age="02:00" minsize="10000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/rtofs_glo.t00z.n00.restart.a.tgz</cyclestr></datadep>
+            <datadep age="02:00" minsize="10000000000"><cyclestr>&COMocean;/mom6.@Y@m@d/mom6_hat10.t00z.n00.restart.a.tgz</cyclestr></datadep>
           </or>
           <or>
             <strneq><left><cyclestr>@H</cyclestr></left><right>00</right></strneq>
