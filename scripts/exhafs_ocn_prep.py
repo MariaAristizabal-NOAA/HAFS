@@ -43,13 +43,15 @@ COMocean = conf.getloc('COMocean')
 hour = conf.getloc('hour')
 hour_int = int(hour)
 YMD = conf.getloc('YMD')
-dir_mom6 = COMocean + '/' + 'mom6.' + YMD + '/' 
-dir_hycominit1 = DATA + '/hycominit1/'
+dir_mom6 = COMocean + '/' + 'mom6.' + YMD  
+dir_hycominit1 = DATA + '/hycominit1'
+
+os.system('mkdir ' + dir_hycominit1) 
 
 if hour_int == 0:
-    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
     os.system(cmd)
-    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
+    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
     os.system(cmd)
     os.chdir(dir_hycominit1)
     cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
@@ -57,14 +59,14 @@ if hour_int == 0:
     cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.n00.restart.a' 
     os.system(cmd)
 else:
-    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz' 
+    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz' 
     os.system(cmd)
-    cmd = 'ln -s ' + dir_mom6 + 'mom6_hat10.t00z.f' + hour + '.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.restart.b' 
+    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b' 
     os.system(cmd)
     os.chdir(dir_hycominit1)
-    cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.f' + hour + '.restart.a.tgz' 
+    cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz' 
     os.system(cmd)
-    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.restart.a' 
+    cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.archv.a' 
     os.system(cmd)
 
 logger.info("hycominit1 done")
