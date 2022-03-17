@@ -34,7 +34,7 @@ syndat=/work/noaa/hwrf/noscrub/input/SYNDAT-PLUS
 COMgfs=/work/noaa/hwrf/noscrub/hafs-input/COMGFSv16
 COMINgfs={COMgfs}
 #COMrtofs=/work/noaa/hwrf/noscrub/hafs-input/COMRTOFSv2
-COMocean=/work/noaa/hwrf/noscrub/hafs-input/COMMOM6analysis
+COMocean=/work/noaa/hwrf/noscrub/hafs-input/MOM6analysis
 COMINocean={COMocean}
 ## A-Deck directory for graphics
 ADECKhafs=/work/noaa/hwrf/noscrub/input/abdeck/aid
