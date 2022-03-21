@@ -40,18 +40,23 @@ hycominit1=hafs.hycom.HYCOMInit1(dstore=ds,conf=conf,section='hycominit1',taskna
 #hycominit1.run()
 
 COMocean = conf.getloc('COMocean')
+WORKhafs = conf.getloc('WORKhafs')
 hour = conf.getloc('hour')
 hour_int = int(hour)
 YMD = conf.getloc('YMD')
 dir_mom6 = COMocean + '/' + 'mom6.' + YMD  
 dir_hycominit1 = DATA + '/hycominit1'
+dir_intercom = WORKhafs + '/intercom'
+dir_hycominit = dir_intercom + '/hycominit'
 
 os.system('mkdir ' + dir_hycominit1) 
+os.system('mkdir ' + dir_hycominit) 
 
+# Linking MOM6 initial condition files to hycominit1 folder 
 if hour_int == 0:
-    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+    cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
     os.system(cmd)
-    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
+    cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
     os.system(cmd)
     os.chdir(dir_hycominit1)
     cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
@@ -59,15 +64,38 @@ if hour_int == 0:
     cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.n00.restart.a' 
     os.system(cmd)
 else:
-    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz' 
+    cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz' 
     os.system(cmd)
-    cmd = 'ln -s ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b' 
+    cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.f' + hour + '.archv.b' 
     os.system(cmd)
     os.chdir(dir_hycominit1)
     cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.f' + hour + '.archv.a.tgz' 
     os.system(cmd)
     cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + 'mom6_hat10.t00z.f' + hour + '.archv.a' 
     os.system(cmd)
+
+# Writing hycom_settings file
+os.chdir(dir_hycominit)
+hycominit1.select_domain(logger)
+hycominit1.hycom_settings.deliver(frominfo='./hycom_settings')
+
+# Linking restart files to hycominit1 folder 
+cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+os.system(cmd)
+cmd = 'ln -sf ' + dir_mom6 + '/' + 'mom6_hat10.t00z.n00.restart.b ' + dir_hycominit1 + '/' + 'mom6_hat10.t00z.n00.restart.b' 
+os.system(cmd)
+
+# copying restart files to hycominit folder 
+os.chdir(dir_hycominit1)
+cmd = 'tar -xpvzf ' + 'mom6_hat10.t00z.n00.restart.a.tgz' 
+os.system(cmd)
+cmd = 'cp ' + 'mom6.' + YMD + '/mom6_hat10.t12z.n00.restart.a ' + dir_hycominit + '/restart_out.a' 
+os.system(cmd)
+cmd = 'cp ' + dir_hycominit1 + '/mom6_hat10.t00z.n00.restart.b ' + dir_hycominit + '/restart_out.b' 
+os.system(cmd)
+
+
+#hycominit1.rtofs_spin(logger)
 
 logger.info("hycominit1 done")
 
